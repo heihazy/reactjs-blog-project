@@ -1,0 +1,8 @@
+.fullPost {
+  justify-items: center;
+  display: grid;
+  align-items: center;
+  margin: 50px;
+  width: 100%;
+  justify-items: center;
+}

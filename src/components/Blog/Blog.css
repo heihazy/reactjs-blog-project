@@ -1,0 +1,7 @@
+.posts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: stretch;
+  grid-gap: 1rem;
+  margin: 1rem;
+}
