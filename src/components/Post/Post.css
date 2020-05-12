@@ -1,8 +1,8 @@
-.fullPost {
-  justify-items: center;
+.post-card {
   display: grid;
   align-items: center;
-  margin: 50px;
-  width: 100%;
-  justify-items: center;
+}
+
+.blog-text {
+  font-size: 1.3rem;
 }

@@ -30,7 +30,7 @@ const NavBar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/contact" className="nav-link" onClick={closeNav}>
+            <Link to="/create-post" className="nav-link" onClick={closeNav}>
               Bee Friends
             </Link>
           </li>

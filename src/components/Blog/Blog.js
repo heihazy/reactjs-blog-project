@@ -1,60 +1,51 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Card from "../Card/Card";
-import { Switch, Route, useRouteMatch } from "react-router-dom";
-
 import Post from "../Post/Post";
-
+import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 const Blog = () => {
   const [post, setPost] = useState([]);
   let match = useRouteMatch();
 
   useEffect(() => {
     axios.get("http://localhost:3001/posts").then((response) => {
-      const posts = response.data.slice(0, 10); //slice data from 0 to 10
+      const posts = response.data; //slice data from 0 to 10
       setPost(posts);
       console.log(posts);
     });
-  }, []); //this empty array let the data run only once
-
-  const removeHandler = (id) => {
-    console.log(id);
-    axios
-      .delete("http://localhost:3001/posts/" + id)
-      .then(() => {
-        return axios.get("http://localhost:3001/posts");
-      })
-      .then((response) => {
-        setPost(response.data);
-      });
-  };
-
-  const PostList = post.map((p) => {
+  }, []);
+  const postList = post.map((post) => {
     return (
-      <Card
-        key={p.id}
-        title={p.title}
-        author={p.author}
-        text={p.text}
-        img={p.img}
-        link={`${match.url}/${p.id}`}
-        remove={() => removeHandler(p.id)}
-      />
+      <Col xs={6}>
+        <Card key={post.id}>
+          <Card.Img variant="top" src={post.img} alt={post.title} />
+          <Card.Body>
+            <Card.Title>{post.title}</Card.Title>
+            <Card.Text>{post.author}</Card.Text>
+            <Card.Text>{post.text}</Card.Text>
+            <Button variant="outline-info">
+              <Link to={`${match.url}/${post.id}`}>Read More</Link>
+            </Button>
+          </Card.Body>
+        </Card>
+      </Col>
     );
   });
-
   return (
-    <>
-      <Switch>
-        <Route path="/blog/:postId">
-          <Post />
-        </Route>
-        <Route path={match.path}>
-          <div className="posts">{PostList}</div>
-        </Route>
-      </Switch>
-    </>
+    <Container style={{ paddingTop: "1rem" }}>
+      <Row md={3}>
+        <Switch>
+          <Route path="/blog/:postId">
+            <Post />
+          </Route>
+          <Route path={match.path}>{postList}</Route>
+        </Switch>
+      </Row>
+    </Container>
   );
 };
-
 export default Blog;
