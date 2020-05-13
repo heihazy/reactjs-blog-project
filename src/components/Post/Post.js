@@ -4,21 +4,56 @@ import "./Post.css";
 import axios from "axios";
 import Alert from "react-bootstrap/Alert";
 import Image from "react-bootstrap/Image";
+import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 const Post = () => {
   const [loadedPost, setLoadedPost] = useState();
+  const [editPost, setEditPost] = useState();
   let { postId } = useParams();
   useEffect(() => {
     //fetch data when there is no loaded post, if there is dont do it
     if (!loadedPost) {
       axios.get("http://localhost:3001/posts/" + postId).then((response) => {
-        console.log(response.data);
         setLoadedPost(response.data);
       });
     }
   });
+
+  const editValueHandler = (e) => {
+    setLoadedPost({
+      ...loadedPost,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const forcePostReload = () => {
+    window.location.href = `http://localhost:3000/blog/${postId}`;
+  };
+
+  const savePostHandler = (e) => {
+    e.preventDefault();
+    axios
+      .patch(`http://localhost:3001/posts/${postId}`, loadedPost)
+      .then((response) => {
+        console.log(response.data);
+      });
+    forcePostReload();
+  };
+
+  const editPostHandler = (e) => {
+    e.preventDefault();
+    setEditPost(true);
+    // const element = document.querySelector("H1");
+    // element.setAttribute("contenteditable", true);
+    // element.focus();
+    // var val = element.value; //store the value of the element
+    // element.value = ""; //clear the value of the element
+    // element.value = val; //set that value back.
+    // element.classList.add("editable");
+  };
 
   //below we define tow possible situations
   let post = undefined;
@@ -27,21 +62,77 @@ const Post = () => {
     post = <h1>Loading post</h1>;
   }
 
-  if (loadedPost) {
+  if (loadedPost && editPost) {
+    post = (
+      <Container>
+        <Form style={{ paddingLeft: "2rem", paddingTop: "2rem" }}>
+          <Form.Group controlId="formBasicName">
+            <Form.Label style={{ fontSize: "1.5rem" }}>Image Url</Form.Label>
+            <Form.Control
+              type="text"
+              name="img"
+              defaultValue={loadedPost.img}
+              onChange={(e) => editValueHandler(e)}
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicName">
+            <Form.Label style={{ fontSize: "1.5rem" }}>Title</Form.Label>
+            <Form.Control
+              type="text"
+              name="title"
+              defaultValue={loadedPost.title}
+              onChange={(e) => editValueHandler(e)}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formBasicName">
+            <Form.Label style={{ fontSize: "1.5rem" }}>Name</Form.Label>
+            <Form.Control
+              type="text"
+              defaultValue={loadedPost.author}
+              onChange={(e) => editValueHandler(e)}
+              name="author"
+            />
+          </Form.Group>
+
+          <Form.Group controlId="exampleForm.ControlTextarea1">
+            <Form.Label style={{ fontSize: "1.5rem" }}>
+              Write content here
+            </Form.Label>
+            <Form.Control
+              as="textarea"
+              rows="3"
+              name="text"
+              defaultValue={loadedPost.text}
+              onChange={(e) => editValueHandler(e)}
+            />
+          </Form.Group>
+
+          <Button onClick={savePostHandler} variant="primary" type="submit">
+            Save
+          </Button>
+        </Form>
+      </Container>
+    );
+  } else if (loadedPost) {
     post = (
       <Container>
         <Row className="post-card">
           <Image className="post" src={loadedPost.img} alt={loadedPost.title} />
           <Col className="blog-text">
-            <h1>Post {loadedPost.id}</h1>
+            <h1 value="this.value">Post {loadedPost.id}</h1>
             <h3>{loadedPost.author}</h3>
             <p>{loadedPost.title}</p>
             <p>{loadedPost.text}</p>
             <Alert>
-              <Alert.Link>
-                <Link to="/blog">Back to Blog</Link>
-              </Alert.Link>
+              <Link to="/blog">Back to Blog</Link>
             </Alert>
+            <Button onClick={editPostHandler} variant="success" type="submit">
+              Edit
+            </Button>
+            <Button onClick={savePostHandler} variant="primary" type="submit">
+              Save
+            </Button>
           </Col>
         </Row>
       </Container>

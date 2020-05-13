@@ -35,8 +35,8 @@ const Blog = () => {
 
   const postList = post.map((post) => {
     return (
-      <Col xs={6}>
-        <Card key={post.id}>
+      <Col xs={6} key={post.id}>
+        <Card>
           <Card.Img variant="top" src={post.img} alt={post.title} />
           <Card.Body className="card-text">
             <Card.Title>{post.title}</Card.Title>
@@ -48,7 +48,7 @@ const Blog = () => {
 
             <Button onClick={() => removeHandler(post.id)}>Delete Post</Button>
             <Button variant="outline-info">
-              <Link to={"/blog/edit/" + post.id}>Edit Post</Link>
+              <Link to={`${match.url}/edit/${post.id}`}>Edit Post</Link>
             </Button>
           </Card.Body>
         </Card>
