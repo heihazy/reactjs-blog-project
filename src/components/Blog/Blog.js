@@ -8,6 +8,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./Blog.css";
+import EditPost from "../EditPost/EditPost";
 const Blog = () => {
   const [post, setPost] = useState([]);
   let match = useRouteMatch();
@@ -31,6 +32,7 @@ const Blog = () => {
         setPost(response.data);
       });
   };
+
   const postList = post.map((post) => {
     return (
       <Col xs={6}>
@@ -45,6 +47,9 @@ const Blog = () => {
             </Button>
 
             <Button onClick={() => removeHandler(post.id)}>Delete Post</Button>
+            <Button variant="outline-info">
+              <Link to={"/blog/edit/" + post.id}>Edit Post</Link>
+            </Button>
           </Card.Body>
         </Card>
       </Col>
@@ -56,6 +61,9 @@ const Blog = () => {
         <Switch>
           <Route path="/blog/:postId">
             <Post />
+          </Route>
+          <Route path="/blog/edit/:postId">
+            <EditPost />
           </Route>
           <Route path={match.path}>{postList}</Route>
         </Switch>
