@@ -69,6 +69,20 @@
       "title": "Post10",
       "text": "Proin vehicula, augue et consequat lobortis, enim orci ultricies mauris, in facilisis metus turpis et purus. Integer pretium quis lectus at efficitur. Donec varius a lacus ut iaculis. Quisque porta, magna vitae accumsan rutrum, lacus orci volutpat sem, mattis hendrerit lacus ipsum in sem.",
       "img": "https://source.unsplash.com/1600x900/?helsinki"
+    },
+    {
+      "img": "https://source.unsplash.com/1600x900/?helsinki",
+      "title": "Cloudy wednesday",
+      "author": "Chocopie",
+      "text": "I miss summer and sunlight",
+      "id": 12
+    },
+    {
+      "img": "https://source.unsplash.com/1600x900/?vietnam",
+      "title": "Coming Home",
+      "author": "Phuong Bap",
+      "text": "It's been almost 2 years and i'm finally coming home",
+      "id": 13
     }
   ]
 }

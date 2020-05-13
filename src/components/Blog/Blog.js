@@ -18,6 +18,18 @@ const Blog = () => {
       console.log(posts);
     });
   }, []);
+
+  const removeHandler = (id) => {
+    console.log(id);
+    axios
+      .delete("http://localhost:3001/posts/" + id)
+      .then(() => {
+        return axios.get("http://localhost:3001/posts");
+      })
+      .then((response) => {
+        setPost(response.data);
+      });
+  };
   const postList = post.map((post) => {
     return (
       <Col xs={6}>
@@ -30,6 +42,8 @@ const Blog = () => {
             <Button variant="outline-info">
               <Link to={`${match.url}/${post.id}`}>Read More</Link>
             </Button>
+
+            <Button onClick={() => removeHandler(post.id)}>Delete Post</Button>
           </Card.Body>
         </Card>
       </Col>
