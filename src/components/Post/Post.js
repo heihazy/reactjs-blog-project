@@ -7,7 +7,6 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
 const Post = () => {
   const [loadedPost, setLoadedPost] = useState();
   let { postId } = useParams();
@@ -32,12 +31,7 @@ const Post = () => {
     post = (
       <Container>
         <Row className="post-card">
-          <Image
-            className="post"
-            src={loadedPost.img}
-            alt={loadedPost.title}
-            fluid
-          />
+          <Image className="post" src={loadedPost.img} alt={loadedPost.title} />
           <Col className="blog-text">
             <h1>Post {loadedPost.id}</h1>
             <h3>{loadedPost.author}</h3>

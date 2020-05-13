@@ -7,13 +7,14 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import "./Blog.css";
 const Blog = () => {
   const [post, setPost] = useState([]);
   let match = useRouteMatch();
 
   useEffect(() => {
     axios.get("http://localhost:3001/posts").then((response) => {
-      const posts = response.data; //slice data from 0 to 10
+      const posts = response.data;
       setPost(posts);
       console.log(posts);
     });
@@ -35,7 +36,7 @@ const Blog = () => {
       <Col xs={6}>
         <Card key={post.id}>
           <Card.Img variant="top" src={post.img} alt={post.title} />
-          <Card.Body>
+          <Card.Body className="card-text">
             <Card.Title>{post.title}</Card.Title>
             <Card.Text>{post.author}</Card.Text>
             <Card.Text>{post.text}</Card.Text>

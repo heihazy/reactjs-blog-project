@@ -1,15 +1,4 @@
-.posts {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  align-items: stretch;
-  grid-gap: 1rem;
-  margin: 1rem;
-}
-
-.cards {
-  background-color: #f1efef;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #e2caca;
-  display: grid;
-  justify-items: center;
+@import url('https://fonts.googleapis.com/css2?family=Arapey&family=Niconne&display=swap');
+.card-text {
+  font-family: 'Arapey', serif;
 }
