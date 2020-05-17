@@ -9,10 +9,19 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import LikeDisplay from "../LikeDisplay/LikeDisplay";
+
 const Post = () => {
   const [loadedPost, setLoadedPost] = useState();
   const [editPost, setEditPost] = useState();
+  const [like, setLike] = useState(0);
   let { postId } = useParams();
+
+  const addLike = () => {
+    setLike(like + 1);
+  };
   useEffect(() => {
     //fetch data when there is no loaded post, if there is dont do it
     if (!loadedPost) {
@@ -124,6 +133,14 @@ const Post = () => {
             <h3>{loadedPost.author}</h3>
             <p>{loadedPost.title}</p>
             <p>{loadedPost.text}</p>
+            <div className="like-display">
+              <Button onClick={addLike} variant="outline-primary">
+                <FontAwesomeIcon icon={faThumbsUp} />
+              </Button>
+              <Button variant="outline-primary">
+                <LikeDisplay like={like} />
+              </Button>
+            </div>
             <Alert>
               <Link to="/blog">Back to Blog</Link>
             </Alert>

@@ -8,7 +8,6 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./Blog.css";
-import EditPost from "../EditPost/EditPost";
 const Blog = () => {
   const [post, setPost] = useState([]);
   let match = useRouteMatch();
@@ -62,9 +61,7 @@ const Blog = () => {
           <Route path="/blog/:postId">
             <Post />
           </Route>
-          <Route path="/blog/edit/:postId">
-            <EditPost />
-          </Route>
+          <Route path="/blog/edit/:postId"></Route>
           <Route path={match.path}>{postList}</Route>
         </Switch>
       </Row>

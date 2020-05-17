@@ -12,3 +12,8 @@
 .editable {
   background-color: tomato;
 }
+
+.like-display {
+  display: flex;
+  justify-content: space-between;
+}
