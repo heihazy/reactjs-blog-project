@@ -41,14 +41,18 @@ const Blog = () => {
             <Card.Title>{post.title}</Card.Title>
             <Card.Text>{post.author}</Card.Text>
             <Card.Text>{post.text}</Card.Text>
-            <Button variant="outline-info">
-              <Link to={`${match.url}/${post.id}`}>Read More</Link>
-            </Button>
+            <div className="card-btn">
+              <Button variant="outline-info">
+                <Link to={`${match.url}/${post.id}`}>Read More</Link>
+              </Button>
 
-            <Button onClick={() => removeHandler(post.id)}>Delete Post</Button>
-            <Button variant="outline-info">
-              <Link to={`${match.url}/edit/${post.id}`}>Edit Post</Link>
-            </Button>
+              <Button onClick={() => removeHandler(post.id)}>
+                Delete Post
+              </Button>
+              <Button variant="outline-info">
+                <Link to={`${match.url}/edit/${post.id}`}>Edit Post</Link>
+              </Button>
+            </div>
           </Card.Body>
         </Card>
       </Col>

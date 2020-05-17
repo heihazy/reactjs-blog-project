@@ -147,9 +147,6 @@ const Post = () => {
             <Button onClick={editPostHandler} variant="success" type="submit">
               Edit
             </Button>
-            <Button onClick={savePostHandler} variant="primary" type="submit">
-              Save
-            </Button>
           </Col>
         </Row>
       </Container>
