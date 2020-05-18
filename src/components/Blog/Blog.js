@@ -13,7 +13,7 @@ const Blog = () => {
   let match = useRouteMatch();
 
   useEffect(() => {
-    axios.get("http://localhost:3001/posts").then((response) => {
+    axios.get("https://fibe-db.herokuapp.com/posts").then((response) => {
       const posts = response.data;
       setPost(posts);
       console.log(posts);
@@ -23,9 +23,9 @@ const Blog = () => {
   const removeHandler = (id) => {
     console.log(id);
     axios
-      .delete("http://localhost:3001/posts/" + id)
+      .delete("https://fibe-db.herokuapp.com/posts/" + id)
       .then(() => {
-        return axios.get("http://localhost:3001/posts");
+        return axios.get("https://fibe-db.herokuapp.com/posts");
       })
       .then((response) => {
         setPost(response.data);
@@ -48,9 +48,6 @@ const Blog = () => {
 
               <Button onClick={() => removeHandler(post.id)}>
                 Delete Post
-              </Button>
-              <Button variant="outline-info">
-                <Link to={`${match.url}/edit/${post.id}`}>Edit Post</Link>
               </Button>
             </div>
           </Card.Body>

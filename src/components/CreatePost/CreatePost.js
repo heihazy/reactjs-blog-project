@@ -19,14 +19,16 @@ const Create = () => {
   };
   const addPostHandler = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3001/posts", newPost).then((response) => {
-      console.log(response.data);
-    });
-    forceReload();
+    axios
+      .post("https://fibe-db.herokuapp.com/posts", newPost)
+      .then((response) => {
+        console.log(response.data);
+        forceReload();
+      });
   };
 
   const forceReload = () => {
-    window.location.href = "http://localhost:3000/blog";
+    window.location.href = "https://fibe.herokuapp.com/blog";
   };
 
   return (

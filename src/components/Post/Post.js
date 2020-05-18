@@ -25,9 +25,11 @@ const Post = () => {
   useEffect(() => {
     //fetch data when there is no loaded post, if there is dont do it
     if (!loadedPost) {
-      axios.get("http://localhost:3001/posts/" + postId).then((response) => {
-        setLoadedPost(response.data);
-      });
+      axios
+        .get("https://fibe-db.herokuapp.com/posts/" + postId)
+        .then((response) => {
+          setLoadedPost(response.data);
+        });
     }
   });
 
@@ -39,17 +41,25 @@ const Post = () => {
   };
 
   const forcePostReload = () => {
-    window.location.href = `http://localhost:3000/blog/${postId}`;
+    window.location.href = `https://fibe.herokuapp.com/blog/${postId}`;
   };
 
   const savePostHandler = (e) => {
     e.preventDefault();
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
     axios
-      .patch(`http://localhost:3001/posts/${postId}`, loadedPost)
+      .patch(
+        `https://fibe-db.herokuapp.com/posts/${postId}`,
+        loadedPost,
+        config
+      )
       .then((response) => {
-        console.log(response.data);
+        forcePostReload();
       });
-    forcePostReload();
   };
 
   const editPostHandler = (e) => {
