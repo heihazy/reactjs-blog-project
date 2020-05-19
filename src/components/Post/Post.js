@@ -137,7 +137,12 @@ const Post = () => {
     post = (
       <Container>
         <Row className="post-card">
-          <Image className="post" src={loadedPost.img} alt={loadedPost.title} />
+          <Image
+            style={{ width: "80%" }}
+            className="post"
+            src={loadedPost.img}
+            alt={loadedPost.title}
+          />
           <Col className="blog-text">
             <h1 value="this.value">Post {loadedPost.id}</h1>
             <h3>{loadedPost.author}</h3>
