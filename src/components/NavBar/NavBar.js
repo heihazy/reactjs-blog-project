@@ -34,6 +34,21 @@ const NavBar = () => {
               Bee Friends
             </Link>
           </li>
+          <li>
+            <Link to="/health" className="nav-link" onClick={closeNav}>
+              Bee Healthy
+            </Link>
+          </li>
+          <li>
+            <Link to="/travel" className="nav-link" onClick={closeNav}>
+              Bee Adventurous
+            </Link>
+          </li>
+          <li>
+            <Link to="/lifestyle" className="nav-link" onClick={closeNav}>
+              Bee aesthetic
+            </Link>
+          </li>
         </ul>
       </nav>
       <span className="open-btn" onClick={openNav}>
