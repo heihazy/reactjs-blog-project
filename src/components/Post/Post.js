@@ -136,10 +136,9 @@ const Post = () => {
   } else if (loadedPost) {
     post = (
       <Container>
-        <Row className="post-card">
+        <Row className="post-card" key={loadedPost.id}>
           <Image className="post" src={loadedPost.img} alt={loadedPost.title} />
           <Col className="blog-text">
-            <h1 value="this.value">Post {loadedPost.id}</h1>
             <h3>{loadedPost.author}</h3>
             <p>{loadedPost.title}</p>
             <p>{loadedPost.text}</p>
